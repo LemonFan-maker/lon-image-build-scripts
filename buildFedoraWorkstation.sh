@@ -85,7 +85,8 @@ gen_fstab "$rootdir"
 
 # Add %wheel to sudoers
 log "Adding %wheel to sudoers"
-echo "%wheel ALL=(ALL:ALL) ALL" > "$rootdir/etc/sudoers.d/00_image_builder"
+cp ./drop/00_image_builder "$rootdir/etc/sudoers.d/00_image_builder"
+
 
 # +++ Rotate gdm
 log "Configuring gdm and gnome"

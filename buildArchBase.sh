@@ -54,8 +54,11 @@ chroot "$rootdir" pacman -R linux-aarch64 linux-firmware --noconfirm
 log "Populating pacman key store"
 chroot "$rootdir" pacman-key --init
 chroot "$rootdir" pacman-key --populate archlinuxarm
-log "Updating system and installing needed packages"
+log "Enable pacman parallel downloads"
 chroot "$rootdir" sed -i "s/#ParallelDownloads/ParallelDownloads/g" /etc/pacman.conf
+log "Update key store"
+chroot "$rootdir" pacman -Sy archlinux-keyring archlinuxarm-keyring --noconfirm
+log "Updating system and installing needed packages"
 chroot "$rootdir" pacman -Syu sudo bluez bluez-utils vulkan-freedreno networkmanager --noconfirm
 
 # Install nabu specific packages
@@ -77,7 +80,7 @@ gen_fstab "$rootdir"
 
 # Add %wheel to sudoers
 log "Adding %wheel to sudoers"
-echo "%wheel ALL=(ALL:ALL) ALL" > "$rootdir/etc/sudoers.d/00_image_builder"
+cp ./drop/00_image_builder "$rootdir/etc/sudoers.d/00_image_builder"
 
 # Set default timezone
 log "Setting default timezone"
