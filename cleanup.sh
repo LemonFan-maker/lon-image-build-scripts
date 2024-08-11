@@ -8,16 +8,19 @@ fi
 
 source common.sh
 
+# Begin script
+
 # shellcheck disable=SC2162
-if find ./tmp/ -mindepth 1 -maxdepth 1 | read; then
-  for d in ./tmp/*/; do
-    log "Unmounting $d"
-    detach_chroot "$d"
-    umount "$d/boot/simpleinit" 2> /dev/null
-    umount "$d/boot/efi" 2> /dev/null
-    umount ./tmp/tmp.* 2> /dev/null
-    rm -d "$d"
-  done
-else
+find ./tmp/ -mindepth 1 -maxdepth 1 | read || {
   log_err "Nothing to clean"
-fi
+  exit 1
+}
+
+for d in ./tmp/*/; do
+  log "Unmounting $d"
+  detach_chroot "$d"
+  umount "$d/boot/simpleinit" 2> /dev/null
+  umount "$d/boot/efi" 2> /dev/null
+  umount ./tmp/tmp.* 2> /dev/null
+  rm -d "$d"
+done
