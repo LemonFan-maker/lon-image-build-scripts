@@ -5,9 +5,18 @@ SIMPLEINIT_CMDLINE="root=PARTLABEL=linux loglevel=3 fbcon=rotate:1"
 function log() {
     printf "\e[1m\e[92m==>\e[0m \e[1m%s\e[0m\n" "$*"
 }
+
 function log_err() {
     printf "\e[1m\e[31m==>\e[0m \e[1m%s\e[0m\n" "$*"
 }
+
+function sigterm_handler() {
+  printf "\e[1m\e[31m>\e[0m \e[1m%s\e[0m\n" "Shutdown signal received."
+  exit 1
+}
+
+trap 'trap " " SIGINT SIGTERM SIGHUP; kill 0; wait; sigterm_handler' SIGINT SIGTERM SIGHUP
+
 
 function create_image() {
     name="$(realpath "./raw/${1}.img")"
