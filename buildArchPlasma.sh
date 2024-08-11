@@ -44,6 +44,10 @@ log "Removing default kernel and settings"
 chroot "$rootdir" userdel -r alarm
 chroot "$rootdir" pacman -R linux-aarch64 linux-firmware --noconfirm
 
+# Add custom mirrorlist
+log "Adding mirrorlist"
+cp ./drop/mirrorlist "$rootdir/etc/pacman.d/mirrorlist"
+
 # Install minimal desktop environment
 log "Populating pacman key store"
 chroot "$rootdir" pacman-key --init
