@@ -48,7 +48,7 @@ echo "127.0.0.1 localhost
 log "Updating system and installing needed packages"
 chroot "$rootdir" apt update
 chroot "$rootdir" apt upgrade -y
-chroot "$rootdir" apt install -y ubuntu-desktop bash-completion sudo ssh nano
+chroot "$rootdir" apt install -y ubuntu-desktop bash-completion sudo ssh nano rust-zram-generator
 
 # Install nabu specific packages
 log "Installing nabu kernel, modules, firmwares and userspace daemons"
@@ -63,13 +63,13 @@ chroot "$rootdir" apt clean
 # Enable userspace daemons
 log "Generating fstab"
 log "Enabling userspace daemons"
-chroot "$rootdir" systemctl enable qrtr-ns pd-mapper tqftpserv rmtfs
+chroot "$rootdir" systemctl enable qrtr-ns pd-mapper tqftpserv rmtfs systemd-zram-setup@zram0.service
 
 gen_fstab "$rootdir"
 
 # Enable zram
 log "Enabling zram"
-cp ./drop/99-zram.rules "$rootdir/etc/udev/rules.d/99-zram.rules"
+cp ./drop/zram-generator.conf "$rootdir/etc/systemd/zram-generator.conf"
 
 # +++ Rotate gdm
 log "Configuring gdm and gnome"

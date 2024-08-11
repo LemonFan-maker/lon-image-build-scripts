@@ -63,7 +63,7 @@ chroot "$rootdir" sed -i "s/#ParallelDownloads/ParallelDownloads/g" /etc/pacman.
 log "Update key store"
 chroot "$rootdir" pacman -Sy archlinux-keyring archlinuxarm-keyring --noconfirm
 log "Updating system and installing needed packages"
-chroot "$rootdir" pacman -Syu sudo bluez bluez-utils vulkan-freedreno networkmanager --noconfirm
+chroot "$rootdir" pacman -Syu sudo bluez bluez-utils vulkan-freedreno networkmanager zram-generator --noconfirm
 
 # Install nabu specific packages
 log "Installing nabu kernel, modules, firmwares and userspace daemons"
@@ -73,7 +73,7 @@ rm "$rootdir"/opt/*.zst
 
 # Enable userspace daemons
 log "Enabling userspace daemons"
-chroot "$rootdir" systemctl enable qrtr-ns pd-mapper tqftpserv rmtfs bluetooth NetworkManager
+chroot "$rootdir" systemctl enable qrtr-ns pd-mapper tqftpserv rmtfs bluetooth NetworkManager systemd-zram-setup@zram0.service
 
 # Clean pacman cache
 log "Cleaning pacman cache"
@@ -88,7 +88,7 @@ cp ./drop/00_image_builder "$rootdir/etc/sudoers.d/00_image_builder"
 
 # Enable zram
 log "Enabling zram"
-cp ./drop/99-zram.rules "$rootdir/etc/udev/rules.d/99-zram.rules"
+cp ./drop/zram-generator.conf "$rootdir/etc/systemd/zram-generator.conf"
 
 # Generate en_US locale
 log "Generating en_US locale"
