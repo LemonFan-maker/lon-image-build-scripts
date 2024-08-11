@@ -67,6 +67,10 @@ chroot "$rootdir" systemctl enable qrtr-ns pd-mapper tqftpserv rmtfs
 
 gen_fstab "$rootdir"
 
+# Enable zram
+log "Enabling zram"
+cp ./drop/99-zram.rules "$rootdir/etc/udev/rules.d/99-zram.rules"
+
 # +++ Rotate gdm
 log "Configuring gdm and gnome"
 mkdir -p "$rootdir/etc/skel/.config"

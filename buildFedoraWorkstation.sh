@@ -87,6 +87,9 @@ gen_fstab "$rootdir"
 log "Adding %wheel to sudoers"
 cp ./drop/00_image_builder "$rootdir/etc/sudoers.d/00_image_builder"
 
+# Enable zram
+log "Enabling zram"
+cp ./drop/99-zram.rules "$rootdir/etc/udev/rules.d/99-zram.rules"
 
 # +++ Rotate gdm
 log "Configuring gdm and gnome"
