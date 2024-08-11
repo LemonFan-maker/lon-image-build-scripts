@@ -1,0 +1,2 @@
+# /etc/sudoers.d/00_image_builder
+%wheel ALL=(ALL:ALL) ALL
