@@ -1,3 +1,7 @@
-PARTLABEL=linux / ext4 errors=remount-ro,x-systemd.growfs 0 1
-PARTLABEL=esp /boot/efi/ vfat umask=0022 0 1
-PARTLABEL=logfs /boot/simpleinit/ vfat umask=0022 0 1
+# /etc/fstab: static file system information.
+#
+# <file system>  <mount point>      <type> <options>                <dump>  <pass>
+PARTLABEL=linux  /                  ext4   errors=remount-ro,x-systemd.growfs  0 1
+PARTLABEL=esp    /boot/efi/         vfat   defaults,umask=0022                 0 1
+PARTLABEL=logfs  /boot/simpleinit/  vfat   defaults,umask=0022                 0 1
+/dev/zram0       none               swap   defaults,pri=100,nofail             0 0
