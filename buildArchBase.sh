@@ -82,9 +82,9 @@ gen_fstab "$rootdir"
 log "Adding %wheel to sudoers"
 cp ./drop/00_image_builder "$rootdir/etc/sudoers.d/00_image_builder"
 
-# Set default timezone
-log "Setting default timezone"
-chroot "$rootdir" timedatectl set-timezone Europe/Moscow
+# Enable zram
+log "Enabling zram"
+cp ./drop/99-zram.rules "$rootdir/etc/udev/rules.d/99-zram.rules"
 
 # Generate en_US locale
 log "Generating en_US locale"
