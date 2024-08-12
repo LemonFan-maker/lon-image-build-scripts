@@ -57,7 +57,7 @@ chroot "$rootdir" bash -c "dpkg -i /opt/*.deb"
 chroot "$rootdir" bash -c "rm /opt/*.deb"
 
 # Clean apt cache
-log "Cleaning pacman cache"
+log "Cleaning apt cache"
 chroot "$rootdir" apt clean
 
 # Enable userspace daemons
