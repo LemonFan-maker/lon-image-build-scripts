@@ -17,6 +17,10 @@ function sigterm_handler() {
 
 trap 'trap " " SIGINT SIGTERM SIGHUP; kill 0; wait; sigterm_handler' SIGINT SIGTERM SIGHUP
 
+[ -d ./cache/ ] || {
+  [ -f ./cache ] || rm ./cache
+  mkdir ./cache/
+}
 
 function create_image() {
     name="$(realpath "./raw/${1}.img")"
