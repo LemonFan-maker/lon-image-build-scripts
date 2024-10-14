@@ -93,37 +93,37 @@ cp ./drop/zram-generator.conf "$rootdir/etc/systemd/zram-generator.conf"
 
 # +++ Rotate gdm
 log "Configuring gdm and gnome"
-mkdir -p "$rootdir/etc/skel/.config"
-echo '<monitors version="2">
-  <configuration>
-    <logicalmonitor>
-      <x>0</x>
-      <y>0</y>
-      <scale>2</scale>
-      <primary>yes</primary>
-      <transform>
-        <rotation>right</rotation>
-        <flipped>no</flipped>
-      </transform>
-      <monitor>
-        <monitorspec>
-          <connector>DSI-1</connector>
-          <vendor>unknown</vendor>
-          <product>unknown</product>
-          <serial>unknown</serial>
-        </monitorspec>
-        <mode>
-          <width>1600</width>
-          <height>2560</height>
-          <rate>104.000</rate>
-        </mode>
-      </monitor>
-    </logicalmonitor>
-  </configuration>
-</monitors>
-' > "$rootdir/etc/skel/.config/monitors.xml"
-chroot "$rootdir" bash -c 'cp /etc/skel/.config/monitors.xml ~gdm/.config/'
-chroot "$rootdir" bash -c 'chown gdm: ~gdm/.config/'
+#mkdir -p "$rootdir/etc/skel/.config"
+#echo '<monitors version="2">
+#  <configuration>
+#    <logicalmonitor>
+#      <x>0</x>
+#      <y>0</y>
+#      <scale>2</scale>
+#      <primary>yes</primary>
+#      <transform>
+#        <rotation>right</rotation>
+#        <flipped>no</flipped>
+#      </transform>
+#      <monitor>
+#        <monitorspec>
+#          <connector>DSI-1</connector>
+#          <vendor>unknown</vendor>
+#          <product>unknown</product>
+#          <serial>unknown</serial>
+#        </monitorspec>
+#        <mode>
+#          <width>1600</width>
+#          <height>2560</height>
+#          <rate>104.000</rate>
+#        </mode>
+#      </monitor>
+#    </logicalmonitor>
+#  </configuration>
+#</monitors>
+#' > "$rootdir/etc/skel/.config/monitors.xml"
+#chroot "$rootdir" bash -c 'cp /etc/skel/.config/monitors.xml ~gdm/.config/'
+#chroot "$rootdir" bash -c 'chown gdm: ~gdm/.config/'
 # ---
 
 # Finish image
