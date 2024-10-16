@@ -15,7 +15,7 @@ which debootstrap > /dev/null 2>&1 || {
 }
 
 # Settings
-VERSION="noble"
+VERSION="jammy"
 IMAGE_NAME="UbuntuDesktop_$VERSION"
 
 # Begin script
@@ -40,10 +40,10 @@ export DEBIAN_FRONTEND=noninteractive
 
 # Setup inet
 log "Setting up chroot"
-echo "nameserver 1.1.1.1" > "$rootdir/etc/resolv.conf"
-echo "xiaomi-nabu" > "$rootdir/etc/hostname"
+echo "nameserver 8.8.8.8" > "$rootdir/etc/resolv.conf"
+echo "MiPad5" > "$rootdir/etc/hostname"
 echo "127.0.0.1 localhost
-127.0.1.1 xiaomi-nabu" > "$rootdir/etc/hosts"
+127.0.1.1 MiPad5" > "$rootdir/etc/hosts"
 
 # Update system and install desktop
 log "Updating system and installing needed packages"
