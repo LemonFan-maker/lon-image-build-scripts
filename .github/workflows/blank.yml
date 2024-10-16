@@ -36,12 +36,10 @@ jobs:
           mkdir uploading
           mv drop packages buildUbuntuDesktop.sh common.sh cleanup.sh compress.sh uploading
           cd uploading
-          sudo source common.sh
+          sudo sources common.sh
           sudo ./buildUbuntuDesktop.sh
       
       - uses: actions/upload-artifact@v4
         with:
           name: my-artifact
           path: ./uploading # or path/to/artifact
-      
-
