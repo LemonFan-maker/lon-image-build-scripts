@@ -27,14 +27,14 @@ jobs:
       # Runs a single command using the runners shell
       - name: InstallDeps
         run: |
-          sudo apt update && sudo apt upgrade -y
+          sudo apt update
           sudo apt install debootstrap
 
       # Runs a set of commands using the runners shell
       - name: CreateFiles
         run: |
           mkdir uploading
-          mv * uploading
+          mv drop packages buildUbuntuDesktop.sh common.sh cleanup.sh compress.sh uploading
           cd uploading
           sudo source common.sh
           sudo ./buildUbuntuDesktop.sh
@@ -43,3 +43,5 @@ jobs:
         with:
           name: my-artifact
           path: ./uploading # or path/to/artifact
+      
+
